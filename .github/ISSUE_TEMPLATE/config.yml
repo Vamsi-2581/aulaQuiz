@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentación del proyecto
+    url: https://github.com/<owner>/aulaquiz/tree/main/docs
+    about: Requerimientos, arquitectura, ADRs y guías. Leé esto antes de abrir un issue.
+  - name: Guía de contribución
+    url: https://github.com/<owner>/aulaquiz/blob/main/CONTRIBUTING.md
+    about: Cómo forkear, clonar, crear una rama y abrir un PR.
+  - name: Restricciones para agentes y humanos
+    url: https://github.com/<owner>/aulaquiz/blob/main/AGENTS.md
+    about: Decisiones cerradas, patrones prohibidos y convenciones.

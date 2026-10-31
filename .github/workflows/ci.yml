@@ -1,0 +1,85 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  detect:
+    name: Detectar stack
+    runs-on: ubuntu-latest
+    outputs:
+      has-go: ${{ steps.check.outputs.has-go }}
+      has-web: ${{ steps.check.outputs.has-web }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: check
+        run: |
+          if [ -f go.mod ]; then echo "has-go=true" >> $GITHUB_OUTPUT; else echo "has-go=false" >> $GITHUB_OUTPUT; fi
+          if [ -d web ]; then echo "has-web=true" >> $GITHUB_OUTPUT; else echo "has-web=false" >> $GITHUB_OUTPUT; fi
+
+  go:
+    name: Go build & test
+    needs: detect
+    if: needs.detect.outputs.has-go == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+      - name: gofmt
+        run: |
+          unformatted=$(gofmt -l .)
+          if [ -n "$unformatted" ]; then
+            echo "Archivos sin gofmt:"
+            echo "$unformatted"
+            exit 1
+          fi
+      - name: go vet
+        run: go vet ./...
+      - name: go test
+        run: go test -race -count=1 ./...
+      - name: go build
+        run: go build ./...
+
+  frontend-budget:
+    name: Frontend bundle budget
+    needs: detect
+    if: needs.detect.outputs.has-web == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verificar tamaño gzipped < 150 KB
+        run: |
+          total=0
+          while IFS= read -r -d '' f; do
+            size=$(gzip -c "$f" | wc -c)
+            total=$((total + size))
+          done < <(find web -type f \( -name '*.html' -o -name '*.css' -o -name '*.js' \) -print0)
+          echo "Total gzipped: $total bytes (límite: 153600)"
+          if [ "$total" -gt 153600 ]; then
+            echo "::error::Bundle excede 150 KB gzipped"
+            exit 1
+          fi
+
+  docs-links:
+    name: Links en documentación
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Chequear links markdown
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --no-progress --offline '**/*.md'
+          fail: false

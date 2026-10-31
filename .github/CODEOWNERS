@@ -1,0 +1,7 @@
+# Default: el maintainer revisa todo.
+* @dperalta86
+
+# Documentación y ADRs: revisión obligatoria del maintainer.
+/docs/ @dperalta86
+/AGENTS.md @dperalta86
+/CONTRIBUTING.md @dperalta86

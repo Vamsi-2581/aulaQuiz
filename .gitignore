@@ -1,0 +1,33 @@
+# Binarios
+/aulaquiz
+/aulaquiz.exe
+/dist/
+/bin/
+
+# Go
+*.test
+*.out
+coverage.txt
+coverage.html
+
+# Entorno
+.env
+.env.*
+!.env.example
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# k6
+test/load/results/*.json
+
+# Dev docs
+./dev
