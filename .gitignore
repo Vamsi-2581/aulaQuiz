@@ -30,4 +30,4 @@ Thumbs.db
 test/load/results/*.json
 
 # Dev docs
-./dev
+.dev/
