@@ -2,7 +2,7 @@
 
 ## Join y inicio de partida
 
-    Docente                Servidor                 Alumno 1..140
+    Docente                Servidor                 Alumno 1..200
        │                      │                          │
        │ teacher.join         │                          │
        ├─────────────────────►│                          │

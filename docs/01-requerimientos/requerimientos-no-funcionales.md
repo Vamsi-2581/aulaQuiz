@@ -2,7 +2,7 @@
 
 ## RNF-01 — Concurrencia
 
-Soportar **140 alumnos + 1 docente** en una sala con WebSockets activos, sobre
+Soportar **200 alumnos + 1 docente** en una sala con WebSockets activos, sobre
 una única instancia del servidor.
 
 ## RNF-02 — Peso del cliente

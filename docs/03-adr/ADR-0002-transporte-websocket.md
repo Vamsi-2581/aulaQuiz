@@ -31,6 +31,6 @@ modernos.
 ## Alternativas consideradas
 
 - **SSE + HTTP POST:** requiere dos canales, más complejo que WS.
-- **WebRTC data channels:** sobredimensionado, sin beneficio claro a 140
+- **WebRTC data channels:** sobredimensionado, sin beneficio claro a 200
   conexiones contra un servidor único.
 - **Long polling:** alto overhead, latencia variable, peor experiencia.

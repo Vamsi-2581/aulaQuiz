@@ -72,7 +72,7 @@ Estas limitaciones están documentadas y pueden ampliarse en v2 vía ADR.
 - Elimina la superficie de XSS por construcción.
 - No agrega dependencias: ~150 líneas de Go en `internal/markdown` y ~80
   líneas de JS en `web/render-ast.js`.
-- Payload extra: ~2–4x el tamaño del string Markdown. Para 140 clientes y
+- Payload extra: ~2–4x el tamaño del string Markdown. Para 200 clientes y
   10 preguntas, menos de 100 KB adicionales en toda la partida.
 - Cero requests externos.
 

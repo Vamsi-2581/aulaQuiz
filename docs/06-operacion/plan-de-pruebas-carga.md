@@ -6,13 +6,13 @@
 
 ## Escenario 1 — Join masivo
 
-- 140 clientes WebSocket se conectan en una ventana de 10 segundos.
+- 200 clientes WebSocket se conectan en una ventana de 10 segundos.
 - Cada uno envía `student.join` con nickname único.
 - **Criterio de éxito:** 100 % de joins exitosos, p95 de `student.joined` < 500 ms.
 
 ## Escenario 2 — Pregunta con respuestas en ráfaga
 
-- 140 clientes conectados, docente emite `question.show`.
+- 200 clientes conectados, docente emite `question.show`.
 - Todos los alumnos responden en una ventana de 2 segundos.
 - **Criterio de éxito:** 100 % de `answer.ack` recibidos, p95 < 200 ms,
   servidor por debajo de 100 MB RSS y 25 % CPU.
@@ -25,7 +25,7 @@
 
 ## Escenario 4 — Partida completa
 
-- 10 preguntas, 140 alumnos respondiendo cada una.
+- 10 preguntas, 200 alumnos respondiendo cada una.
 - **Criterio de éxito:** sin desconexiones no intencionales, ranking estable,
   podio correcto al final.
 

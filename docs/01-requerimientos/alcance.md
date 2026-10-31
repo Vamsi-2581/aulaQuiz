@@ -3,7 +3,7 @@
 ## En alcance (v1)
 
 - Clase **online** (alumnos y docente conectados por videoconferencia, cada uno en su equipo).
-- Un docente, una sala activa por vez, hasta **140 alumnos**.
+- Un docente, una sala activa por vez, hasta **200 alumnos**.
 - Quiz de preguntas multiple-choice con una única respuesta correcta.
 - Registro efímero del alumno (nickname obligatorio, email institucional opcional).
 - Avatar generado localmente a partir del nickname.

@@ -82,7 +82,7 @@ servidor no arranca y emite un mensaje claro con la ubicación del error
 
 ## RF-14 — Límite de sala
 
-La sala admite hasta **140 alumnos** más el docente. Un join número 141
+La sala admite hasta **200 alumnos** más el docente. Un join número 141
 recibe `error { code: "room_full" }`.
 
 ## RF-15 — Takeover de sesión

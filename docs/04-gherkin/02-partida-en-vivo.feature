@@ -3,7 +3,7 @@
 Característica: Partida en vivo
 
   Antecedentes:
-    Dado que existe la sala "AB12" con 140 alumnos conectados
+    Dado que existe la sala "AB12" con 200 alumnos conectados
     Y el docente está conectado en el panel
 
   Escenario: El docente inicia la partida

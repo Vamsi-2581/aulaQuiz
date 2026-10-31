@@ -14,7 +14,7 @@ Estado **en memoria del proceso**, protegido por `sync.RWMutex` dentro de cada
 
 ## Justificación
 
-- A 140 alumnos, el volumen de estado es trivial (decenas de KB).
+- A 200 alumnos, el volumen de estado es trivial (decenas de KB).
 - El acceso en memoria es más rápido que cualquier almacenamiento externo.
 - Elimina dependencias de infraestructura, reduce puntos de fallo y simplifica
   el despliegue a "copiar un binario y ejecutarlo".

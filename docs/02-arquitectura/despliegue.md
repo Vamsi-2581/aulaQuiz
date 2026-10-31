@@ -32,7 +32,7 @@ Sirve en `http://0.0.0.0:8080`:
 ## Infraestructura sugerida
 
 - **Opción A (recomendada):** VPS mínimo (1 vCPU, 512 MB RAM). Suficiente
-  para 140 conexiones. HTTPS vía Caddy o nginx como reverse proxy.
+  para 200 conexiones. HTTPS vía Caddy o nginx como reverse proxy.
 - **Opción B:** Raspberry Pi 4 en la red local de la facultad, accesible por
   el Wi-Fi del aula. Útil para el modo presencial (v2) y para pruebas de carga.
 

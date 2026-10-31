@@ -48,7 +48,7 @@
 ## Fase 5 — Piloto en clase real
 
 - [ ] Despliegue en VPS
-- [ ] Clase con 140 alumnos por Zoom
+- [ ] Clase con 200 alumnos por Zoom
 - [ ] Recolección de métricas y feedback
 - [ ] Ajustes post-piloto
 

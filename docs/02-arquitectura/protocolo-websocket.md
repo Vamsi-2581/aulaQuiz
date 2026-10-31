@@ -215,7 +215,7 @@ renderizar. Es la única fuente de verdad para el cliente tras una reconexión.
     },
     "self": { "studentId": "s_abc", "score": 1240, "rank": 12 },
     "leaderboard": [{ "nickname": "Ana", "score": 1500, "rank": 1 }, ...],
-    "participants": 140
+    "participants": 200
 }}
 ```
 Para docente, `self` es `{ "role": "teacher" }`.
@@ -273,7 +273,7 @@ Cuando el docente pierde la conexión, los alumnos reciben este evento. El juego
 | `code` | Significado |
 |---|---|
 | `room_not_found` | El código de sala no existe |
-| `room_full` | La sala alcanzó el máximo de alumnos (140) |
+| `room_full` | La sala alcanzó el máximo de alumnos (200) |
 | `nickname_taken` | Nickname duplicado activo en la sala |
 | `nickname_invalid` | Fuera de 1–20 caracteres o con caracteres no permitidos |
 | `session_expired` | Token de reconexión inválido o vencido |

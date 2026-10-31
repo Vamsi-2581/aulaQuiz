@@ -4,8 +4,8 @@
 
 ## Contexto
 
-En un juego con 140 alumnos, si cada respuesta individual se retransmite a
-todos, se generan 140 × 140 = 19.600 mensajes por pregunta, más los eventos
+En un juego con 200 alumnos, si cada respuesta individual se retransmite a
+todos, se generan 200 × 200 = 40.000 mensajes por pregunta, más los eventos
 de ranking. Eso satura al servidor y, sobre todo, la red del alumno (que ya
 está compartida con Zoom).
 

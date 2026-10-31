@@ -25,7 +25,7 @@ propone resolución y abre ADR.
 | Tie-break de puntajes | Glosario, sección "Desempate" |
 | Takeover de sesión | ADR-0011 |
 | Markdown en preguntas y opciones | ADR-0010 |
-| Límite de alumnos | `room_full` con 140 (RNF-01) |
+| Límite de alumnos | `room_full` con 200 (RNF-01) |
 | Docente desconectado | El timer no se pausa; `teacher.disconnected` / `teacher.reconnected` |
 | Formato del nickname | protocolo, sección "Validación de nickname" |
 | Quiz inválido al arrancar | `formato-quiz.md`, validación bloqueante |

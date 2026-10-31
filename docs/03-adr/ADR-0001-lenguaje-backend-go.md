@@ -5,7 +5,7 @@
 
 ## Contexto
 
-Necesitamos un backend que sostenga 140 WebSockets concurrentes en una única
+Necesitamos un backend que sostenga 200 WebSockets concurrentes en una única
 instancia, con un binario simple de desplegar y fácil de mantener por un equipo
 docente pequeño. Se evaluaron Go y Rust.
 
@@ -15,7 +15,7 @@ Usar **Go** con `github.com/coder/websocket`.
 
 ## Justificación
 
-- A la escala de 140 conexiones, **ambos lenguajes sobran**. La diferencia de
+- A la escala de 200 conexiones, **ambos lenguajes sobran**. La diferencia de
   memoria por conexión (~15–30 KB) y de latencia (~6 ms P99) no se materializa
   en la experiencia del alumno.
 - Go ofrece concurrencia explícita y simple (goroutines + channels) que se

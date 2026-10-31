@@ -15,7 +15,7 @@ en `docs/03-adr/`; si necesitás cambiar una, leé la sección "Cuándo crear un
 (tipo Wayground/Quizizz), diseñada **específicamente** para el escenario:
 
 - **Clase online**, alumnos y docente conectados por Zoom.
-- **140 alumnos simultáneos** en una sola sala.
+- **200 alumnos simultáneos** en una sola sala.
 - **Un servidor único**, sin escalado horizontal.
 - **Cliente ultraliviano**, porque Zoom ya consume 1–1.5 GB de RAM en la máquina del alumno.
 - **Sin anti-cheating, sin cuentas, sin persistencia**.
@@ -174,7 +174,7 @@ Si sos un agente y el usuario te pide algo que viola una restricción dura, **ex
 
 ## 9. Recordatorio de alcance (v1)
 
-**En alcance**: modo online, 140 alumnos, multiple-choice, nicknames efímeros, avatares generados, ranking, podio, reconexión.
+**En alcance**: modo online, 200 alumnos, multiple-choice, nicknames efímeros, avatares generados, ranking, podio, reconexión.
 
 **Fuera de alcance**: modo presencial, anti-cheating, cuentas, historial, analytics, editor visual, preguntas abiertas, imágenes/audio, múltiples docentes, salas concurrentes, móvil nativo, i18n.
 
