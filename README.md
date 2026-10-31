@@ -1,8 +1,10 @@
 # aulaquiz
 
 Alternativa autoalojable y libre a herramientas de quiz en vivo (tipo Wayground/Quizizz)
-pensada específicamente para el escenario **clase online con 140 alumnos conectados
+pensada específicamente para el escenario **clase online con 200 alumnos conectados
 simultáneamente por Zoom**.
+
+![first-banner image](img/banner.jpg)
 
 ## Principios de diseño
 
