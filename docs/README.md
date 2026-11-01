@@ -63,7 +63,6 @@
 
 - [Tu primer PR](./08-colaboracion/primer-pr.md)
 - [Revisión de PRs](./08-colaboracion/revision-de-prs.md)
-- [Protección de main](./08-colaboracion/proteccion-de-main.md)
 
 ## Documentos raíz
 
