@@ -42,6 +42,9 @@ antes de escribir código.
 | H7 | **Broadcast agregado**, nunca retransmisión individual de respuestas | ADR-0007 |
 | H8 | Animaciones **solo con CSS nativo** (`transform`/`opacity`) | ADR-0008 |
 | H9 | Avatares **derivados determinísticamente del nickname**, sin assets ni requests externos | ADR-0009 |
+| H10 | Persistencia de estadísticas en SQLite, **nunca en el hot path** | ADR-0012 |
+| H11 | `tenant_id` en el esquema desde Fase 1, valor `"default"` | ADR-0012 |
+| H12 | Ningún dato de alumno se persiste. Ni ID, ni nickname, ni email, ni IP | ADR-0005 + ADR-0012 |
 
 ---
 
@@ -74,6 +77,18 @@ Si te encontrás queriendo hacer alguna de estas cosas, **detenete y abrí un is
 - ❌ Agregar routers HTTP de terceros (chi, gin, echo, fiber). Usar `net/http` estándar.
 - ❌ Agregar WebRTC, gRPC, GraphQL, SSE. El transporte es WebSocket, punto.
 - ❌ Implementar anti-cheating de cualquier tipo (detección de foco, bloqueo de copy/paste, verificación de identidad).
+- ❌ Construir queries SQL por concatenación de strings. Toda query usa
+  prepared statements de `database/sql` con placeholders `?`. Nunca
+  `fmt.Sprintf` para SQL.
+- ❌ Tocar SQLite desde el hot path del juego (respuestas, timer, ranking).
+  SQLite se toca solo en bordes: al cerrar sala y al generar reportes.
+- ❌ Persistir `student_id`, `nickname`, `email`, `ip` o cualquier dato que
+  identifique a un alumno. Solo agregados por pregunta.
+- ❌ Usar `tenant_id` provisto por el cliente. El `tenant_id` siempre viene
+  del `context.Context`, inyectado por el middleware a partir de la sesión
+  autenticada (o `"default"` en Fase 1).
+- ❌ Agregar `ORM` (GORM, ent, sqlc, etc.). `database/sql` + prepared
+  statements es suficiente y no oculta el SQL.
 
 ### Proceso
 - ❌ Refactorizar código fuera del alcance del PR. **Scope creep es motivo de rechazo.**
@@ -98,6 +113,14 @@ Si te encontrás queriendo hacer alguna de estas cosas, **detenete y abrí un is
 - ✅ **`gofmt`** aplicado. `go vet ./...` sin warnings. `go test ./...` verde antes de pushear.
 - ✅ **Respetar `prefers-reduced-motion`** en toda animación nueva.
 - ✅ **Accesibilidad mínima**: contraste suficiente, `aria-label` en botones sin texto, navegación por teclado en el cliente alumno.
+- ✅ **Toda escritura a SQLite** va en una transacción explícita.
+- ✅ **Toda lectura a SQLite** filtra por `tenant_id` del contexto. Nunca
+  hay `SELECT` sin filtro de tenant.
+- ✅ **Todo acceso a datos** pasa por una interfaz de repositorio en
+  `internal/domain` (ej. `StatsRepository`). La implementación SQLite vive
+  en `internal/storage/sqlite`.
+- ✅ **Migraciones** son archivos embebidos con `//go:embed`, aplicados al
+  arrancar, idempotentes y versionados con `PRAGMA user_version`.
 
 ---
 
@@ -180,6 +203,13 @@ Si sos un agente y el usuario te pide algo que viola una restricción dura, **ex
 
 Si una idea tuya cae en "fuera de alcance", **no la implementes en v1**. Anotala en `docs/07-varios/roadmap-mvp.md` como candidata a v2 vía PR de doc.
 
+**Persistencia en v1:** estadísticas agregadas por partida (participantes,
+aciertos por pregunta, distribución, tiempo promedio). **Nunca** datos de
+alumnos. El hot path del juego **no** toca SQLite.
+
+**Autenticación en v1:** token estático de docente por variable de entorno
+(`TEACHER_TOKEN`). OAuth para docentes queda para Fase 2 (ver `modelo-tenant.md`).
+
 ---
 
 ## 10. Herramientas que leen este archivo
@@ -200,3 +230,26 @@ abrí un ADR que supere ADR-0010.
 
 El parser server-side (`internal/markdown`) es el único lugar donde se acepta
 markdown. El cliente **nunca** ve markdown crudo: ve AST.
+
+## 12. Aislamiento y multi-tenant
+
+Toda decisión que toque persistencia, autenticación o aislamiento de datos
+debe leer primero `docs/02-arquitectura/modelo-tenant.md`. Ese documento es
+la referencia canónica sobre:
+
+- Qué es un tenant en aulaQuiz.
+- Por qué Fase 1 es single-tenant con `tenant_id = "default"`.
+- Cómo se migra a multi-tenant sin reescribir.
+- Dónde se hace el aislamiento (por archivo SQLite por tenant).
+- Qué se persiste y qué nunca se persiste.
+
+Reglas duras derivadas de ese documento:
+
+- El `tenant_id` **nunca** viene del cliente. Viene del contexto.
+- El aislamiento entre alumnos se hace **por asociación de conexión a la
+  sala**, no por un campo del mensaje. Un alumno no puede cambiar de sala
+  enviando un `roomCode` distinto.
+- Los mensajes WebSocket nunca retransmiten datos de un alumno a otro, salvo
+  el ranking agregado (ADR-0007).
+- Toda nueva tabla en SQLite incluye `tenant_id` desde el día uno, aunque
+  en Fase 1 valga `"default"`.

@@ -10,11 +10,15 @@ propone resolución y abre ADR.
 |---|---|---|
 | 1 | Modo presencial (v2) | fuera de alcance v1 |
 | 2 | Editor visual de quizzes (v2) | fuera de alcance v1 |
-| 3 | Persistencia de resultados al docente (v2) | fuera de alcance v1 |
+| 3 | Visor histórico de partidas desde el cliente (v2) | fuera de alcance v1 |
 | 4 | Listas y tablas en Markdown (v2) | fuera de alcance v1 |
 | 5 | Anidamiento en Markdown (v2) | fuera de alcance v1 |
 | 6 | i18n (v2) | fuera de alcance v1 |
 | 7 | Soporte de imágenes en preguntas (v2) | fuera de alcance v1 |
+| 8 | Multi-tenant en operación (Fase 2) | ver `modelo-tenant.md` |
+| 9 | OAuth para docentes (Fase 2) | ver `modelo-tenant.md` |
+| 10 | Modelo freemium / monetización (Fase 3+) | no decidido |
+| 11 | Aislamiento físico por tenant: `.db` por tenant vs. tabla compartida | decisión de Fase 2 |
 
 ## Resueltas (referencia)
 
@@ -25,7 +29,10 @@ propone resolución y abre ADR.
 | Tie-break de puntajes | Glosario, sección "Desempate" |
 | Takeover de sesión | ADR-0011 |
 | Markdown en preguntas y opciones | ADR-0010 |
-| Límite de alumnos | `room_full` con 200 (RNF-01) |
+| Límite de alumnos | `room_full` con 140 (RNF-01) |
 | Docente desconectado | El timer no se pausa; `teacher.disconnected` / `teacher.reconnected` |
 | Formato del nickname | protocolo, sección "Validación de nickname" |
 | Quiz inválido al arrancar | `formato-quiz.md`, validación bloqueante |
+| Persistencia de estadísticas | SQLite, hot path intacto (ADR-0012 propuesto) |
+| Multi-tenant | Estrategia documentada en `modelo-tenant.md`; esquema preparado desde Fase 1 |
+| Datos de alumnos persistidos | Ninguno (ADR-0005 + ADR-0012) |

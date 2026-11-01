@@ -16,6 +16,7 @@
 - [Modelo de datos](./02-arquitectura/modelo-de-datos.md)
 - [Despliegue](./02-arquitectura/despliegue.md)
 - [Formato del quiz](./02-arquitectura/formato-quiz.md)
+- [Modelo de tenant y aislamiento](./02-arquitectura/modelo-tenant.md)
 
 ## 03 — ADRs (Architecture Decision Records)
 
@@ -30,6 +31,7 @@
 - [ADR-0009 — Avatares generados](./03-adr/ADR-0009-avatares-generados-localmente.md)
 - [ADR-0010 — Soporte de Markdown](./03-adr/ADR-0010-soporte-markdown.md)
 - [ADR-0011 — Takeover de sesión](./03-adr/ADR-0011-takeover-sesion.md)
+- [ADR-0012 — Persistencia de estadísticas en SQLite](./03-adr/ADR-0012-persistencia-estadisticas-sqlite.md)
 
 ## 04 — Gherkin (comportamiento observable)
 

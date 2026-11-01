@@ -21,7 +21,14 @@
 - [ ] `internal/hub` con crear/get/delete de salas
 - [ ] `internal/room` con estados `lobby → question_open → question_closed → finished`
 - [ ] `internal/client` con lectura/escritura concurrente, ping/pong y takeover (ADR-0011)
-- [ ] Tests unitarios de `domain/scoring`, `domain/ranking`, `markdown`
+- [ ] `internal/domain` con `StatsRepository` (interfaz)
+- [ ] `internal/storage/sqlite`: apertura, migraciones embebidas, `user_version`
+- [ ] `internal/storage/sqlite`: implementación de `StatsRepository`
+      (escritura al cerrar sala, lectura para reporte)
+- [ ] `internal/auth`: interfaz `Authenticator`, implementación `StaticToken`
+      (Fase 1)
+- [ ] Tests unitarios de `domain/scoring`, `domain/ranking`, `markdown`,
+      `storage/sqlite` (con SQLite en memoria)
 
 ## Fase 2 — Cliente mínimo
 
@@ -63,3 +70,21 @@
 - [ ] Adaptar a red local (Raspberry Pi o servidor en el aula)
 - [ ] Test de carga en Wi-Fi de aula
 - [ ] Consideraciones de NAT y contención de espectro
+
+## Fase 1.5 — Estadísticas y reportes (post-piloto)
+
+- [ ] Comando `aulaquiz report --quiz <id> --last <n>` que lee SQLite y
+      muestra promedios por pregunta
+- [ ] Endpoint `GET /teacher/report/:sessionId` para el panel docente
+- [ ] Multi-quiz: `QUIZ_DIR` en vez de `QUIZ_PATH`, selector en el panel
+- [ ] Backup documentado (`cp data/tenants/default.db backup/`)
+
+## Fase 2 — Multi-tenant
+
+Ver `docs/02-arquitectura/modelo-tenant.md` para la estrategia completa.
+
+- [ ] OAuth para docentes (recomendado: `goth`)
+- [ ] Un archivo SQLite por tenant (`data/tenants/<tenant_id>.db`)
+- [ ] Selector de quiz filtrado por tenant
+- [ ] Panel de reportes filtrado por tenant
+- [ ] Migración de datos existentes (`default` → tenant real)
