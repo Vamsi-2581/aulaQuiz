@@ -105,11 +105,9 @@ Convención de nombres
     "email": "ana@frba.utn.edu.ar"
 }}
 ```
-`email` es opcional (`null` o ausente). El servidor rechaza nickname duplicado
-activo en la sala con `error { code: "nickname_taken" }`. Si el nickname
-corresponde a una sesión en período de gracia, esta se descarta y el nuevo
-join gana (no hay takeover entre sesiones distintas: son identidades distintas
-para el servidor).
+`email` es opcional (`null` o ausente). El servidor no rechaza nicknames
+duplicados; en una colisión case-insensitive agrega el sufijo `(N)` al display
+name.
 
 ### Respuesta exitosa: `student.joined`
 ```json
@@ -120,6 +118,8 @@ para el servidor).
     "snapshot": { ...mismo payload que room.snapshot... }
 }}
 ```
+`payload.nickname` es el **display name resuelto** y puede diferir del nickname
+tipeado por el usuario debido al sufijo agregado en una colisión.
 `sessionToken` debe guardarse en `localStorage`. Es la única forma de
 recuperar la sesión tras un corte o recarga.
 
@@ -137,7 +137,7 @@ Respuesta: `room.snapshot`. Si el token es inválido o venció el período de gr
 }}
 ```
 El servidor responde `answer.ack { accepted: true|false, reason? }`.
-Rechazos: `question_closed`, `already_answered_locked`, `invalid_option`.
+Rechazos: `question_closed`, `invalid_option`.
 
 ## Mensajes del docente → servidor
 
@@ -165,8 +165,10 @@ El docente debe guardar `teacherToken` (localStorage) para poder reconectar.
 { "type": "teacher.reconnect", "payload": { "teacherToken": "tok_yyy" } }
 ```
 
-Respuesta: `room.snapshot`. Si el token es inválido → `session_expired`.
-Si el docente ya tenía otra conexión activa, aplica takeover (ADR-0011).
+Respuesta: `room.snapshot`. No aplica grace period. El `teacherToken` es válido
+mientras la sala exista. Si la sala fue cerrada (`teacher.close`) →
+`session_expired`. Si el docente ya tenía otra conexión activa, aplica takeover
+(ADR-0011).
 
 `teacher.start`
 Inicia la partida (lobby → question_open con la primera pregunta).
@@ -211,6 +213,7 @@ renderizar. Es la única fuente de verdad para el cliente tras una reconexión.
         {"id":"a","text":[{"t":"code","c":"ls"}]},
         ...
       ],
+            "startsAt": 1717000000000,
       "endsAt": 1717000030000
     },
     "self": { "studentId": "s_abc", "score": 1240, "rank": 12 },
@@ -221,7 +224,8 @@ renderizar. Es la única fuente de verdad para el cliente tras una reconexión.
 Para docente, `self` es `{ "role": "teacher" }`.
 
 ### `question.show`
-Igual a la parte `question` del snapshot, emitido a todos.
+Igual a la parte `question` del snapshot, emitido a todos. Incluye `startsAt`
+(Unix ms) junto a `endsAt`.
 
 ### `question.results`
 ```json
@@ -255,7 +259,7 @@ El cliente que lo recibe debe dejar de reconectar y mostrar un aviso.
 
 ### `error`
 ```json
-{ "type": "error", "payload": { "code": "nickname_taken", "message": "..." } }
+{ "type": "error", "payload": { "code": "session_expired", "message": "..." } }
 ```
 
 ### `teacher.disconnected` (broadcast a alumnos)
@@ -274,12 +278,17 @@ Cuando el docente pierde la conexión, los alumnos reciben este evento. El juego
 |---|---|
 | `room_not_found` | El código de sala no existe |
 | `room_full` | La sala alcanzó el máximo de alumnos (200) |
-| `nickname_taken` | Nickname duplicado activo en la sala |
 | `nickname_invalid` | Fuera de 1–20 caracteres o con caracteres no permitidos |
 | `session_expired` | Token de reconexión inválido o vencido |
 | `question_closed` | Respuesta fuera de la ventana |
 | `invalid_option` | Opción inexistente para la pregunta |
 | `not_teacher` | Acción docente desde conexión de alumno |
+
+## Modelo de identidad
+
+- `studentId` = identidad.
+- `nickname` = display, no único.
+- `sessionToken` = reconnect.
 
 ## Reglas de robustez
 

@@ -8,11 +8,15 @@ y un **token de docente**. El código se comparte por el chat de Zoom.
 ## RF-02 — Unirse a sala (alumno)
 
 El alumno ingresa el código y se registra con:
-- **Nickname** (obligatorio, 1–20 caracteres, único dentro de la sala).
+- **Nickname** (obligatorio, 1–20 caracteres). El servidor lo usa como
+  **display name**; en caso de colisión (case-insensitive) agrega un
+  sufijo determinístico `" (N)"` para desambiguar el leaderboard.
 - **Email institucional** (opcional, no se valida).
 
 El registro es **efímero**: los datos viven solo mientras la sala existe y se
-descartan al cerrarse. No hay cuentas.
+descartan al cerrarse. La identidad interna del alumno es un `studentId`
+opaco, generado por el servidor; el nickname nunca se usa como clave.
+No hay cuentas.
 
 ## RF-03 — Avatar generado
 
@@ -82,7 +86,7 @@ servidor no arranca y emite un mensaje claro con la ubicación del error
 
 ## RF-14 — Límite de sala
 
-La sala admite hasta **200 alumnos** más el docente. Un join número 141
+La sala admite hasta **200 alumnos** más el docente. Un join número 201
 recibe `error { code: "room_full" }`.
 
 ## RF-15 — Takeover de sesión

@@ -54,7 +54,8 @@ El envío de una respuesta y la recepción del ACK debe completarse en
 
 - No se recolecta ningún dato personal más allá del nickname y (opcionalmente)
   el email institucional.
-- No se persiste nada en disco ni en base de datos.
+- No se persiste ningún dato personal de alumno. Sólo agregados anónimos por 
+  partida (ADR-0012).
 - No se envía telemetría a terceros.
 
 ## RNF-10 — Render de Markdown

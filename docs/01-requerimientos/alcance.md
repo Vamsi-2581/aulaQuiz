@@ -3,7 +3,7 @@
 ## En alcance (v1)
 
 - Clase **online** (alumnos y docente conectados por videoconferencia, cada uno en su equipo).
-- **Single-tenant**: una instancia, un docente activo por vez, hasta **140 alumnos**.
+- **Single-tenant**: una instancia, un docente activo por vez, hasta **200 alumnos**.
   La arquitectura es multi-tenant-ready (ver `modelo-tenant.md`), pero la
   operación en v1 es single-tenant.
 - Quiz de preguntas multiple-choice con una única respuesta correcta.
