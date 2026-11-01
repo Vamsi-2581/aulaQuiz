@@ -38,4 +38,4 @@ MVP en diseño. Ver roadmap.
 
 ## Licencia
 
-MIT.
+[LICENCIA](LICENSE)

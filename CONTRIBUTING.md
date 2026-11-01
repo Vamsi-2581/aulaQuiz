@@ -39,10 +39,10 @@ es para humanos; `AGENTS.md` tiene las restricciones duras.
 
 Si ya conocés esto, salteá esta sección.
 
-- **Repositorio (repo)**: el proyecto. El original vive en `github.com/<owner>/aulaquiz`.
+- **Repositorio (repo)**: el proyecto. El original vive en `github.com/dperalta86/aulaQuiz`.
 - **Fork**: una copia del repo bajo *tu* cuenta de GitHub. Sirve para no tocar
   el original. Es como "hacer una copia en tu Google Drive".
-- **Clone**: traer el repo (original o tu fork) a tu máquina. `git clone <url>`.
+- **Clone**: traer el repo (original o tu fork) a tu máquina. `git clone https://github.com/dperalta86/aulaQuiz.git`.
 - **Rama (branch)**: una línea de trabajo paralela. `main` es la principal; no
   se toca directamente. Cada feature/fix va en su propia rama.
 - **Commit**: un punto de guardado con un mensaje. `git commit -m "..."`.
@@ -62,8 +62,8 @@ Si ya conocés esto, salteá esta sección.
 
 ### Paso 1 — Forkear el repo
 
-En `github.com/<owner>/aulaquiz`, click en **"Fork"** (arriba a la derecha).
-Esto crea `github.com/<tu-usuario>/aulaquiz`.
+En `github.com/dperalta86/aulaQuiz`, click en **"Fork"** (arriba a la derecha).
+Esto crea `github.com/<tu-usuario>/aulaQuiz`.
 
 > Si sos colaborador con acceso de escritura, podés saltear el fork y clonar
 > el original directamente. Pero el flujo recomendado sigue siendo fork →
@@ -72,19 +72,19 @@ Esto crea `github.com/<tu-usuario>/aulaquiz`.
 ### Paso 2 — Clonar tu fork
 
 ```bash
-git clone https://github.com/<tu-usuario>/aulaquiz.git
-cd aulaquiz
+git clone https://github.com/<tu-usuario>/aulaQuiz.git
+cd aulaQuiz
 ```
 
 ### Paso 3 — Configurar el upstream (el repo original)
 
 ```bash
-git remote add upstream https://github.com/<owner>/aulaquiz.git
+git remote add upstream https://github.com/dperalta86/aulaQuiz.git
 git remote -v
-# origin    https://github.com/<tu-usuario>/aulaquiz.git (fetch)
-# origin    https://github.com/<tu-usuario>/aulaquiz.git (push)
-# upstream  https://github.com/<owner>/aulaquiz.git (fetch)
-# upstream  https://github.com/<owner>/aulaquiz.git (push)
+# origin    https://github.com/<tu-usuario>/aulaQuiz.git (fetch)
+# origin    https://github.com/<tu-usuario>/aulaQuiz.git (push)
+# upstream  https://github.com/dperalta86/aulaQuiz.git (fetch)
+# upstream  https://github.com/dperalta86/aulaQuiz.git (push)
 ```
 
 ### Paso 4 — Configurar tu identidad (una sola vez)
